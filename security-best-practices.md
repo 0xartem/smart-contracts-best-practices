@@ -51,6 +51,33 @@
   - Don't `delegatecall` to untrusted code.
 
 
-- Ether can be sent to any account. Contract addresses can be precomputed, ether can be sent to an address before the contract is deployed.
+- Ether can be sent to any account
+  - Contract addresses can be precomputed, ether can be sent to an address before the contract is deployed.
+  - Be careful with coding conditions that strictly check the balance of a contract 
+
+- On-chain data is public
+  - Don't require users to publish information too early if privacy is at stake (games, auctions)
+  - Use commitment scheme strategy
+
+- Some particpants can stop participating
+  - Don't depend on a specific party actions to process claims or refunds
+  - Bypass non-acting participants (time limit etc.)
+  - Add economic incentive to act/submit information
+
+- Beware of negation of the most negative signed integer
+
+- Solidity-specific recommendations
+  - Enforce invariants with `assert()`. Combine with pausing and upgrading contracts (to fix a failing assertion)
+  - Use `assert()`, `require()`, `revert()` properly
+  - Use modifiers only for checks
+  - Rounding with integer division. Use multiplier or store numberator and denominator (to calculate off-chain)
+  - Tradeoff between **Interfaces** & **Abstract Classes**
+  - Keep fallback functions simple & check data length
+  - Explicitly mark payable functions and state variables
+  - Explicitly mark visibility in functions and state variables
+  - Lock pragmas to specific compiler version
+  - Use events to monitor contracts activity
+  - Be aware that'Built-ins' can be shadowed
+  - Avoid using `tx.origin`. Never use it for authorization purposes
 
 [Source](https://consensys.github.io/smart-contract-best-practices/general_philosophy/)
