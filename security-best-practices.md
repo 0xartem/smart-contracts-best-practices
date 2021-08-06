@@ -43,7 +43,7 @@
 
 - External Calls
   - Don't use external contract calls when possible
-  - Name variables, methods & contract interfaces that interacting may be unsafe (`UntrustedBank`)
+  - Name variables, methods & contract interfaces that may interact with unsafe calls (`UntrustedBank`)
   - Check-effects-interactions patter. Avoid state changes after external calls. Mitigates Reentrancy risks.
   - Use `.call()`. Don't use `transfer()` and `send()`. Keep Reentrancy risks in mind, the `call()` does NOT mitigate it.
   - Handle errors from external calls
@@ -79,5 +79,10 @@
   - Use events to monitor contracts activity
   - Be aware that'Built-ins' can be shadowed
   - Avoid using `tx.origin`. Never use it for authorization purposes
-
-[Source](https://consensys.github.io/smart-contract-best-practices/general_philosophy/)
+  - Be aware of timestamp manipulation
+    - miner manipulation
+    - it is safe to use a `block.timestamp` if your time-dependant event can vary by 15 sec. and maintain integrity
+    - Avoid using `block.number` as a timestamp
+  - Be careful with multiple inheritance. "Diamond" inheritance resolution
+  - Use interface type instead of the address for type safety (compile-time check)
+  - Avoid using `extcodesize` to check for EOA
