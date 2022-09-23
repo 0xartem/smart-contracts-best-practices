@@ -42,6 +42,7 @@ function withdrawBalance() public {
 ```
 
 ### Pitfalls & Solutions of Reentrancy
+  - Use checks-effects-iinteractions pattern
   - Not only avoid calling external functions too soon. Also avoid calling functions which call external functions
   - Mark untrusted functions in addition to the fix making reentrancy impossible
   - Use mutexes to lock state so it can only be changed by the owner of the lock. Be very careful implementing mutexes
